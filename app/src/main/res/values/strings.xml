@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Pizzaapp</string>
+
+    <string name="button_specialty">Specialty</string>
+    <string name="button_byo">BYO</string>
+    <string name="button_current_order">Current Order</string>
+    <string name="button_store_orders">Store Orders</string>
 </resources>
