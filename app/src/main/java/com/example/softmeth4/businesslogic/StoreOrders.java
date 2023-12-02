@@ -1,7 +1,5 @@
 package com.example.softmeth4.businesslogic;
 
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,16 +13,28 @@ import java.util.ArrayList;
  * @author Jerlin Yuen, Jason Lei
  */
 public class StoreOrders {
+    private static StoreOrders instance;
     private static int nextOrderNum;
     private final ArrayList<Order> orders;
 
     /**
-     * Default constructor, initializes the order number to begin with 1 and
-     * creates an empty list of orders
+     * Private constructor to prevent instantiation from outside the class.
      */
-    public StoreOrders() {
+    private StoreOrders() {
         nextOrderNum = 1;
         orders = new ArrayList<>();
+    }
+
+    /**
+     * Method to get the singleton instance of StoreOrders.
+     *
+     * @return The singleton instance.
+     */
+    public static StoreOrders getInstance() {
+        if (instance == null) {
+            instance = new StoreOrders();
+        }
+        return instance;
     }
 
     /**
@@ -111,39 +121,4 @@ public class StoreOrders {
         //if order number not found
         return null;
     }
-
-    /**
-     * Exports the store orders to a text file, displaying an error popup upon success and failure.
-     * Allows a user to choose where to export/save the file to.
-     *
-     * @return true if export is successful, false otherwise
-     */
-    public boolean export(Stage primaryStage) {
-        if (orders.isEmpty()) {
-            return false;
-        }
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Store Orders File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-
-        // Show save file dialog
-        java.io.File file = fileChooser.showSaveDialog(primaryStage);
-
-        if (file != null) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                for (Order order : orders) {
-                    writer.write(order.toFinalOrderDetailsString());
-                    writer.newLine();
-                }
-                return true;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-        return false;
-    }
-
-
 }

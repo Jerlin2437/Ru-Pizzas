@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Order {
     private static final double TAX_RATE = 0.06625;
+    private static Order instance;
     private int orderNumber;
     private final ArrayList<Pizza> pizzas;
     private double subTotalValue;
@@ -24,21 +25,23 @@ public class Order {
     private String finalOrderTotal;
 
     /**
-     * Default constructor creates a new ArrayList of pizzas in an order
+     * Private constructor to prevent instantiation from outside the class.
      */
-    public Order() {
+    private Order() {
         pizzas = new ArrayList<>();
     }
 
     /**
-     * Parameterized constructor allows for the creation of an order with specified list of pizzas
+     * Method to get the singleton instance of Order.
      *
-     * @param pizzas - order with pizzas
+     * @return The singleton instance.
      */
-    public Order(ArrayList<Pizza> pizzas) {
-        this.pizzas = pizzas;
+    public static Order getInstance() {
+        if (instance == null) {
+            instance = new Order();
+        }
+        return instance;
     }
-
     /**
      * Adds a pizza to the order.
      *
