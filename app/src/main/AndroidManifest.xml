@@ -13,6 +13,18 @@
         android:theme="@style/Theme.Pizzaapp"
         tools:targetApi="31">
         <activity
+            android:name=".StoreOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CurrentOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SpecialtyOrdersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CurrentOrdersActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
