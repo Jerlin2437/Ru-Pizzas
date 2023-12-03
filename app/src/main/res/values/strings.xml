@@ -5,4 +5,6 @@
     <string name="button_byo">BYO</string>
     <string name="button_current_order">Current Order</string>
     <string name="button_store_orders">Store Orders</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

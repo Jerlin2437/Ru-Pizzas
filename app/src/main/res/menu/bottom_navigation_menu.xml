@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Item for Special Pizzas -->
+    <item
+        android:id="@+id/navigation_special_pizzas"
+        android:title="Special Pizzas"
+        android:icon="@drawable/pepperonipizza" />
+
+    <!-- Item for BYO Pizzas -->
+    <item
+        android:id="@+id/navigation_byo_pizzas"
+        android:title="BYO Pizzas"
+        android:icon="@drawable/download" />
+
+    <!-- Item for Current Order -->
+    <item
+        android:id="@+id/navigation_current_order"
+        android:title="Current Order"
+        android:icon="@drawable/download" />
+
+    <!-- Item for Store Orders -->
+    <item
+        android:id="@+id/navigation_store_orders"
+        android:title="Store Orders"
+        android:icon="@drawable/download" />
+
+</menu>
