@@ -125,8 +125,8 @@
 
     <EditText
         android:id="@+id/price"
-        android:layout_width="90dp"
-        android:layout_height="46dp"
+        android:layout_width="92dp"
+        android:layout_height="51dp"
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="text"
