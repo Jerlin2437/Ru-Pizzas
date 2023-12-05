@@ -22,26 +22,24 @@ public class MainActivity2 extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 item -> {
-                    Intent intent = getIntent();
-                    String fragmentTag = intent.getStringExtra("FRAGMENT_TAG");
-
-                    if (fragmentTag != null) {
-                        switch (fragmentTag) {
-                            case "special_pizzas":
-                                replaceFragment(specialPizzasFragment);
-                                return true;
-                            case "byo_pizzas":
-                                replaceFragment(byoPizzasFragment);
-                                return true;
-                            case "current_order":
-                                replaceFragment(currentOrderFragment);
-                                return true;
-                            case "store_orders":
-                                replaceFragment(storeOrdersFragment);
-                                return true;
-                        }
+                    if (item.getItemId() == R.id.navigation_special_pizzas){
+                        replaceFragment(specialPizzasFragment);
+                        return true;
                     }
-                    return false;
+                    else if(item.getItemId() == R.id.navigation_byo_pizzas){
+                        replaceFragment(byoPizzasFragment);
+                        return true;
+                    }
+                    else if (item.getItemId() == R.id.navigation_current_order){
+                        replaceFragment(currentOrderFragment);
+                        return true;
+                    }
+                    else if (item.getItemId() == R.id.navigation_store_orders){
+                        replaceFragment(storeOrdersFragment);
+                        return true;
+                    }
+                    else
+                        return false;
                 }
         );
 
@@ -49,10 +47,10 @@ public class MainActivity2 extends AppCompatActivity {
         replaceFragment(specialPizzasFragment);
     }
 
-
     private void replaceFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
                 .commit();
     }
 }
+

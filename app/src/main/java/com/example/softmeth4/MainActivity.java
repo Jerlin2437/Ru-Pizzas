@@ -15,14 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Assuming you have buttons with these IDs in your activity_main.xml layout
-        View specialPizzasButton = findViewById(R.id.buttonSpecial);
-        View byoPizzasButton = findViewById(R.id.buttonBYO);
-        View currentOrderButton = findViewById(R.id.buttonCurrentOrder);
         View storeOrdersButton = findViewById(R.id.buttonStoreOrders);
-
-        specialPizzasButton.setOnClickListener(v -> openMainActivity2("special_pizzas"));
-        byoPizzasButton.setOnClickListener(v -> openMainActivity2("byo_pizzas"));
-        currentOrderButton.setOnClickListener(v -> openMainActivity2("current_order"));
         storeOrdersButton.setOnClickListener(v -> openMainActivity2("store_orders"));
         
     }

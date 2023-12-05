@@ -93,17 +93,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chooseSpecialty" />
 
-    <EditText
-        android:id="@+id/specialtySauce"
-        android:layout_width="99dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="12dp"
-        android:editable="false"
-        android:ems="10"
-        android:inputType="text"
-        android:text="sauce"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/chooseSpecialty" />
 
     <TextView
         android:id="@+id/textView16"
@@ -122,17 +111,6 @@
         android:layout_marginEnd="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-    <EditText
-        android:id="@+id/price"
-        android:layout_width="92dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="price"
-        app:layout_constraintStart_toEndOf="@+id/textView20"
-        app:layout_constraintTop_toBottomOf="@+id/specialtyRadioButtonGroup" />
 
     <Button
         android:id="@+id/addToOrder"
@@ -154,5 +132,25 @@
         android:text="price: $"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/specialtyRadioButtonGroup" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="90dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="0.00"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/specialtyRadioButtonGroup" />
+
+    <TextView
+        android:id="@+id/SpecialtySauce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="No Sauce Yet"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/chooseSpecialty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
