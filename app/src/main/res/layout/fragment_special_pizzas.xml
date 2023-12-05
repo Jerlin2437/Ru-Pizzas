@@ -112,20 +112,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
-<<<<<<< Updated upstream
-    <EditText
-        android:id="@+id/price"
-        android:layout_width="92dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="price"
-        app:layout_constraintStart_toEndOf="@+id/textView20"
-        app:layout_constraintTop_toBottomOf="@+id/specialtyRadioButtonGroup" />
-=======
 
->>>>>>> Stashed changes
 
     <Button
         android:id="@+id/addToOrder"
