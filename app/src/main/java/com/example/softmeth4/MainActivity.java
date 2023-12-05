@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         byoPizzasButton.setOnClickListener(v -> openMainActivity2("byo_pizzas"));
         currentOrderButton.setOnClickListener(v -> openMainActivity2("current_order"));
         storeOrdersButton.setOnClickListener(v -> openMainActivity2("store_orders"));
+        
     }
 
     private void openMainActivity2(String fragmentTag) {
