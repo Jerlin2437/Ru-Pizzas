@@ -7,34 +7,14 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/buttonBYO"
-        android:layout_width="145dp"
-        android:layout_height="79dp"
-        android:layout_marginTop="164dp"
-        android:layout_marginEnd="28dp"
-        android:text="@string/button_byo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/buttonStoreOrders"
         android:layout_width="145dp"
         android:layout_height="79dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="308dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginBottom="444dp"
         android:text="@string/button_store_orders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonSpecial"
-        android:layout_width="145dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="164dp"
-        android:text="@string/button_specialty"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,15 +25,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.082" />
-
-    <Button
-        android:id="@+id/buttonCurrentOrder"
-        android:layout_width="145dp"
-        android:layout_height="79dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="308dp"
-        android:text="@string/button_current_order"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
