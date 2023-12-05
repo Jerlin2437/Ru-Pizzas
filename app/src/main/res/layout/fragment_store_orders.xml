@@ -10,8 +10,8 @@
 
     <Button
         android:id="@+id/refreshStoreOrders"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="148dp"
+        android:layout_height="63dp"
         android:layout_marginTop="20dp"
         android:text="Refresh Orders"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/allOrders"
         android:layout_width="78dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
@@ -55,22 +55,16 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="Order Total: $"
-        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintStart_toEndOf="@+id/allOrders"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="116dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="294dp"
-        tools:layout_editor_absoluteY="63dp" />
-
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/storeOrderTotal"
         android:layout_width="78dp"
         android:layout_height="51dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:editable="false"
         android:ems="10"
         android:inputType="text"
         android:text="Name"
@@ -78,30 +72,31 @@
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <ListView
+        android:id="@+id/displayStoreOrders"
         android:layout_width="407dp"
-        android:layout_height="440dp"
+        android:layout_height="364dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/allOrders" />
 
     <Button
         android:id="@+id/cancelOrder"
         android:layout_width="151dp"
         android:layout_height="53dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:text="Cancel Order"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_dynamic" />
+        app:layout_constraintTop_toBottomOf="@+id/displayStoreOrders" />
 
     <Button
         android:id="@+id/exportStoreOrders"
         android:layout_width="168dp"
         android:layout_height="55dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:text="Export Store Orders"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_dynamic" />
+        app:layout_constraintTop_toBottomOf="@+id/displayStoreOrders" />
 </androidx.constraintlayout.widget.ConstraintLayout>

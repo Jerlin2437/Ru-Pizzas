@@ -123,37 +123,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="100dp"
-        android:text="Price: $"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toppings" />
-
     <EditText
         android:id="@+id/price"
-        android:layout_width="212dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="90dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="text"
         android:text="price"
-        app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/toppings" />
+        app:layout_constraintStart_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toBottomOf="@+id/specialtyRadioButtonGroup" />
 
     <Button
         android:id="@+id/addToOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:editable="false"
         android:text="Add to order!"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/price" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="price: $"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/specialtyRadioButtonGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
