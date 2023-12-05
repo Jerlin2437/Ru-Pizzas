@@ -1,14 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_special_pizzas">
+    android:background="#E0F7FA"
+    tools:context=".fragment_special_pizzas" >
 
-    <!-- TODO: Update blank fragment layout -->
+    <CheckBox
+        android:id="@+id/extraSauce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Extra Sauce"
+        app:layout_constraintStart_toStartOf="@+id/extraCheese"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <CheckBox
+        android:id="@+id/extraCheese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Extra Cheese"
+        app:layout_constraintStart_toEndOf="@+id/specialtyRadioButtonGroup"
+        app:layout_constraintTop_toBottomOf="@+id/extraSauce" />
+
+    <RadioGroup
+        android:id="@+id/specialtyRadioButtonGroup"
+        android:layout_width="92dp"
+        android:layout_height="161dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14">
+
+        <RadioButton
+            android:id="@+id/specialtySmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Small" />
+
+        <RadioButton
+            android:id="@+id/specialtyMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Medium" />
+
+        <RadioButton
+            android:id="@+id/specialtyLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Large" />
+    </RadioGroup>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Specialty Pizzas"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/pizzaImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/pepperonipizza"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <Spinner
+        android:id="@+id/chooseSpecialty"
+        android:layout_width="408dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pizzaImageView" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Sauce:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseSpecialty" />
+
+    <EditText
+        android:id="@+id/specialtySauce"
+        android:layout_width="99dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="12dp"
+        android:editable="false"
+        android:ems="10"
+        android:inputType="text"
+        android:text="sauce"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/chooseSpecialty" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="64dp"
+        android:text="Toppings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseSpecialty" />
+
+    <ListView
+        android:id="@+id/toppings"
+        android:layout_width="185dp"
+        android:layout_height="254dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="100dp"
+        android:text="Price: $"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toppings" />
+
+    <EditText
+        android:id="@+id/price"
+        android:layout_width="212dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="price"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/toppings" />
+
+    <Button
+        android:id="@+id/addToOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Add to order!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/price" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

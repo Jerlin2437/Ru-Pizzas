@@ -1,20 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_current_order">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    android:background="#E0F7FA"
+    tools:context=".fragment_current_order" >
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/refreshOrder"
+        android:layout_width="144dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="32dp"
+        android:text="Refresh Order"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeOrder" />
+
+    <Button
+        android:id="@+id/removePizza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:text="Remove Pizza"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentOrderView" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/subtotal"
+        android:layout_width="96dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="subtotal"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/currentOrderView" />
+
+    <EditText
+        android:id="@+id/orderTotal"
+        android:layout_width="96dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="6dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="order total"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/salesTax" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Pizza Order"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Order Number:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/orderNumber"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="6dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="##"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ListView
+        android:id="@+id/currentOrderView"
+        android:layout_width="407dp"
+        android:layout_height="456dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Subtotal: $"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentOrderView" />
+
+    <EditText
+        android:id="@+id/salesTax"
+        android:layout_width="95dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="sales tax"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/subtotal" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Sales Tax: $"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Order Total: $"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <Button
+        android:id="@+id/placeOrder"
+        android:layout_width="139dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="32dp"
+        android:text="Place Order"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/removePizza" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
