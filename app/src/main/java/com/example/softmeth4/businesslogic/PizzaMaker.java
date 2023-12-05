@@ -38,6 +38,16 @@ public class PizzaMaker {
             return new Supreme(size, extraSauce, extraCheese);
         else if (Objects.equals(parsedPizza[0], "Seafood"))
             return new Seafood(size, extraSauce, extraCheese);
+        else if (Objects.equals(parsedPizza[0], "Chinese"))
+            return new Chinese(size, extraSauce, extraCheese);
+        else if (Objects.equals(parsedPizza[0], "Korean"))
+            return new Korean(size, extraSauce, extraCheese);
+        else if (Objects.equals(parsedPizza[0], "Cheese"))
+            return new Cheese(size, extraSauce, extraCheese);
+        else if (Objects.equals(parsedPizza[0], "Proteen"))
+            return new Proteen(size, extraSauce, extraCheese);
+        else if (Objects.equals(parsedPizza[0], "Spham"))
+            return new Spham(size, extraSauce, extraCheese);
         else if (Objects.equals(parsedPizza[0], "Meatzza"))
             return new Meatzza(size, extraSauce, extraCheese);
         else if (Objects.equals(parsedPizza[0], "Deluxe"))
