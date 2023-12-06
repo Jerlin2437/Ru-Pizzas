@@ -19,7 +19,7 @@ public class Korean extends Pizza{
         super(size, extraSauce, extraCheese);
         toppings.add(Topping.ONION);
         toppings.add(Topping.BEEF);
-        Sauce = Sauce.TOMATO;
+        sauce = Sauce.TOMATO;
     }
 
     @Override
