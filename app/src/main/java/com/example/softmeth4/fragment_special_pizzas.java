@@ -24,8 +24,8 @@ public class fragment_special_pizzas extends Fragment {
 
     private Spinner spinner;
     private ArrayAdapter<String> spinnerAdapter;
-    private List<String> pizzaList = Arrays.asList("Cheese", "Chinese", "Deluxe", "Korean", "Meatzza", "Pepperoni" +
-            "Proteen" + "Seafood" + "Spham" + "Supreme");
+    private List<String> pizzaList = Arrays.asList("Cheese", "Chinese", "Deluxe", "Korean", "Meatzza", "Pepperoni",
+            "Proteen", "Seafood", "Spham", "Supreme");
 
     public fragment_special_pizzas() {
         // Required empty public constructor
