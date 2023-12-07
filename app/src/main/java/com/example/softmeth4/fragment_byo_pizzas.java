@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,6 +20,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.softmeth4.businesslogic.Order;
@@ -26,7 +28,9 @@ import com.example.softmeth4.businesslogic.PizzaMaker;
 import com.example.softmeth4.enums.Topping;
 import com.example.softmeth4.pizzas.Pizza;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,32 +39,33 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class fragment_byo_pizzas extends Fragment {
-  private static final int MIN_TOPPING = 3;
-  private static final int MAX_TOPPING = 7;
-  private static final double TOPPING_PRICE = 1.49;
-  private static final double MORESAUCECHEESE = 1.0;
-  private Order order;
-  private View view;
-
-  private CheckBox buildExtraCheese;
-  private CheckBox buildExtraSauce;
-  private EditText buildPrice;
-  private Button addTopping;
-  private Button removeTopping;
-  private Button buildAddToOrder;
-  private RadioGroup sauceRadioGroup;
-
-  private Spinner sizeSpinner;
-  private ListView notSelectedToppings;
-  private ListView selectedToppings;
-  private ArrayAdapter<String> spinnerAdapter;
-  private ArrayAdapter<String> notSelectedToppingsAdapter;
-  private ArrayAdapter<String> selectedToppingsAdapter;
-  private List<String> sizeList = Arrays.asList("Small", "Medium", "Large");
-  private List<String> toppingsList = Arrays.asList("Sausage", "Beef", "Pepperoni", "Ham", "Onion", "Green Pepper",
-          "Mushroom", "Black Olive", "Shrimp", "Squid", "Crab Meat", "Spam", "Fish");
-
+    private static final int MIN_TOPPING = 3;
+    private static final int MAX_TOPPING = 7;
+    private static final double TOPPING_PRICE = 1.49;
+    private static final double MORESAUCECHEESE = 1.0;
+    private Order order;
     private Pizza pizza;
+    private View view;
+
+    private CheckBox buildExtraCheeseButton;
+    private CheckBox buildExtraSauceButton;
+    private TextView buildPrice;
+    private Button addTopping;
+    private Button removeTopping;
+    private Button buildAddToOrder;
+    private RadioGroup sauceRadioGroup;
+
+    private Spinner sizeSpinner;
+    private ListView notSelectedToppingsList;
+    private ListView selectedToppingsList;
+    private ArrayAdapter<String> spinnerAdapter;
+    private ArrayAdapter<String> notSelectedToppingsAdapter;
+    private ArrayAdapter<String> selectedToppingsAdapter;
+    private List<String> sizeList = Arrays.asList("Small", "Medium", "Large");
+    private List<String> toppingsList = Arrays.asList("Sausage", "Beef", "Pepperoni", "Ham", "Onion", "Green Pepper",
+          "Mushroom", "Black Olive", "Shrimp", "Squid", "Crab Meat", "Spam", "Fish");
+    private List<String> emptyList = new ArrayList<>();
+
     private int toppingCount;
     private double additionalToppingPrice;
 
@@ -82,61 +87,72 @@ public class fragment_byo_pizzas extends Fragment {
         setupSizeSpinner();
         setupToppingsListViews();
 
-        buildExtraCheese = view.findViewById(R.id.buildExtraCheese);
-        buildExtraSauce = view.findViewById(R.id.buildExtraSauce);
+        buildExtraCheeseButton = view.findViewById(R.id.buildExtraCheese);
+        buildExtraSauceButton = view.findViewById(R.id.buildExtraSauce);
         buildPrice = view.findViewById(R.id.buildPrice);
-        addTopping = view.findViewById(R.id.addTopping);
-        removeTopping = view.findViewById(R.id.removeTopping);
         buildAddToOrder = view.findViewById(R.id.buildAddToOrder);
         sauceRadioGroup = view.findViewById(R.id.sauceRadioGroup);
 
-        addTopping.setOnClickListener(v -> {
-            addToppings();
-            pizza = pizzaParse();
-            updatePizzaPrice();
+        notSelectedToppingsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedTopping = notSelectedToppingsAdapter.getItem(position);
+                addTopping(selectedTopping);
+            }
         });
 
-        removeTopping.setOnClickListener(v -> {
-            removeToppings();
-            pizza = pizzaParse();
-            updatePizzaPrice();
+        selectedToppingsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedTopping = selectedToppingsAdapter.getItem(position);
+                removeTopping(selectedTopping);
+            }
         });
 
-        buildExtraSauce.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            pizza = pizzaParse();
-            updatePizzaPrice();
-        });
+        buildExtraSauceButton.setOnCheckedChangeListener((buttonView, isChecked) -> updatePizzaPrice());
+        buildExtraCheeseButton.setOnCheckedChangeListener((buttonView, isChecked) -> updatePizzaPrice());
 
-        buildExtraCheese.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            pizza = pizzaParse();
-            updatePizzaPrice();
-        });
-
-        buildAddToOrder.setOnClickListener(v -> addToOrder());
+        buildAddToOrder.setOnClickListener(new BuildAddToOrderClickListener());
 
         return view;
     }
 
     private void setupSizeSpinner(){
         sizeSpinner = view.findViewById(R.id.buildSpinner);
-        // Initialize ArrayAdapter
         spinnerAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, sizeList);
-        // Set the dropdown layout style
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Set the adapter to the Spinner
         sizeSpinner.setAdapter(spinnerAdapter);
     }
 
     private void setupToppingsListViews(){
-        notSelectedToppings = view.findViewById(R.id.notSelectedToppings);
-        notSelectedToppingsAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_multiple_choice, toppingsList);
-        notSelectedToppings.setAdapter(notSelectedToppingsAdapter);
-        notSelectedToppings.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        notSelectedToppingsList = (ListView)view.findViewById(R.id.notSelectedToppings);
+        selectedToppingsList = (ListView) view.findViewById(R.id.selectedToppings);
 
-        selectedToppings = view.findViewById(R.id.selectedToppings);
-        selectedToppingsAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1);
-        selectedToppings.setAdapter(selectedToppingsAdapter);
-        selectedToppings.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        notSelectedToppingsAdapter = new ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, new ArrayList<>(toppingsList));
+        notSelectedToppingsList.setAdapter(notSelectedToppingsAdapter);
+
+        selectedToppingsAdapter = new ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, emptyList);
+        selectedToppingsList.setAdapter(selectedToppingsAdapter);
+    }
+
+    private void addTopping(String selectedTopping){
+        if (selectedToppingsAdapter.getCount() >= MAX_TOPPING){
+            showAlert("Too many toppings!", "You can only have a maximum of 7 toppings!");
+        } else{
+            selectedToppingsAdapter.add(selectedTopping);
+            selectedToppingsAdapter.notifyDataSetChanged();
+            notSelectedToppingsAdapter.remove(selectedTopping);
+            toppingCount++;
+            updatePizzaPrice();
+        }
+    }
+
+    private void removeTopping(String selectedTopping){
+        notSelectedToppingsAdapter.add(selectedTopping);
+        notSelectedToppingsAdapter.notifyDataSetChanged();
+        selectedToppingsAdapter.remove(selectedTopping);
+        toppingCount--;
+        updatePizzaPrice();
     }
 
     private void updatePizzaPrice() {
@@ -148,11 +164,11 @@ public class fragment_byo_pizzas extends Fragment {
                 //if more than 3 toppings, add $1.49 for each additional topping after 3
                 additionalToppingPrice = Math.max(0, toppingCount - MAX_TOPPING) * TOPPING_PRICE;
 
-                if (buildExtraSauce.isChecked()) {
+                if (buildExtraSauceButton.isChecked()) {
                     additionalToppingPrice += MORESAUCECHEESE;
                 }
 
-                if (buildExtraCheese.isChecked()) {
+                if (buildExtraCheeseButton.isChecked()) {
                     additionalToppingPrice += MORESAUCECHEESE;
                 }
 
@@ -168,12 +184,21 @@ public class fragment_byo_pizzas extends Fragment {
     }
 
     private Pizza pizzaParse() {
-        RadioButton selectedRadioButton = view.findViewById(sauceRadioGroup.getCheckedRadioButtonId());
-        String sauce = selectedRadioButton.getText().toString();
-        String size = sizeSpinner.getSelectedItem().toString();
         String pizzaType = "BYO";
+        String extraSauceCheck = "false";
+        String extraCheeseCheck = "false";
+        String size = sizeSpinner.getSelectedItem().toString();
+        int selectedRadioButtonId = sauceRadioGroup.getCheckedRadioButtonId();
+        RadioButton selectedRadioButton = view.findViewById(selectedRadioButtonId);
+        String selectedSauce = selectedRadioButton.getText().toString();
+        if (buildExtraSauceButton.isChecked()){
+            extraSauceCheck = "true";
+        }
+        if (buildExtraCheeseButton.isChecked()){
+            extraCheeseCheck = "true";
+        }
 
-        SparseBooleanArray checkedToppings = selectedToppings.getCheckedItemPositions();
+        SparseBooleanArray checkedToppings = selectedToppingsList.getCheckedItemPositions();
         StringBuilder allToppings = new StringBuilder();
 
         for (int i = 0; i < checkedToppings.size(); i++) {
@@ -181,95 +206,59 @@ public class fragment_byo_pizzas extends Fragment {
                 allToppings.append(notSelectedToppingsAdapter.getItem(checkedToppings.keyAt(i))).append(" ");
             }
         }
-        return PizzaMaker.createPizza(pizzaType + " " + size + " false false " + sauce + " " + allToppings.toString().trim());
+        return PizzaMaker.createPizza(pizzaType + " " + size + " " + extraSauceCheck + " " + extraCheeseCheck + " " + selectedSauce + " " + allToppings.toString().trim());
     }
 
-    private void addToppings() {
-        SparseBooleanArray checkedItems = notSelectedToppings.getCheckedItemPositions();
-
-        if (checkedItems.size() >= MAX_TOPPING) {
-            showAlert("Too many toppings!", "You can only have a max of 7 toppings!");
-        } else {
-            // Loop through checked items
-            for (int i = checkedItems.size() - 1; i >= 0; i--) {
-                int position = checkedItems.keyAt(i);
-                if (checkedItems.valueAt(i)) {
-                    String selectedTopping = notSelectedToppingsAdapter.getItem(position);
-                    // Move the topping from notSelectedToppings to selectedToppings
-                    notSelectedToppingsAdapter.remove(selectedTopping);
-                    selectedToppingsAdapter.add(selectedTopping);
-                    toppingCount++; // Update topping count
-                }
-            }
-            // Clear the checked state after moving toppings
-            notSelectedToppings.clearChoices();
-            updatePizzaPrice();
+    private class BuildAddToOrderClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v){
+            addToOrder();
         }
-    }
 
-    private void removeToppings() {
-        SparseBooleanArray checkedItems = selectedToppings.getCheckedItemPositions();
-
-        // Loop through checked items
-        for (int i = checkedItems.size() - 1; i >= 0; i--) {
-            int position = checkedItems.keyAt(i);
-            if (checkedItems.valueAt(i)) {
-                String selectedTopping = selectedToppingsAdapter.getItem(position);
-                // Move the topping from selectedToppings to notSelectedToppings
-                selectedToppingsAdapter.remove(selectedTopping);
-                notSelectedToppingsAdapter.add(selectedTopping);
-                toppingCount--; // Update topping count
-            }
-        }
-        // Clear the checked state after moving toppings
-        selectedToppings.clearChoices();
-        updatePizzaPrice();
-    }
-
-    private void addToOrder() {
-        if (sizeSpinner.getSelectedItem() != null) {
-            if (toppingCount >= MIN_TOPPING) {
-                pizza = pizzaParse();
-                if (buildExtraCheese.isChecked()) {
-                    pizza.setExtraCheese(true);
+        private void addToOrder() {
+            if (sizeSpinner.getSelectedItem() != null) {
+                if (toppingCount >= MIN_TOPPING) {
+                    pizza = pizzaParse();
+                    if (buildExtraCheeseButton.isChecked()) {
+                        pizza.setExtraCheese(true);
+                    }
+                    if (buildExtraSauceButton.isChecked()) {
+                        pizza.setExtraSauce(true);
+                    }
+                    order.addPizza(pizza);
+                    showSuccessPopup();
+                } else {
+                    showFailurePopup1();
                 }
-                if (buildExtraSauce.isChecked()) {
-                    pizza.setExtraSauce(true);
-                }
-                order.addPizza(pizza);
-                showSuccessPopup();
             } else {
-                showFailurePopup1();
+                showFailurePopup2();
             }
-        } else {
-            showFailurePopup2();
+        }
+
+        private void showSuccessPopup() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+            builder.setTitle("Pizza Order Successful")
+                    .setMessage("Your pizza order has been added successfully!")
+                    .setPositiveButton("OK", null)
+                    .show();
+        }
+
+        private void showFailurePopup1() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+            builder.setTitle("Pizza Order Unsuccessful")
+                    .setMessage("You need at least 3 toppings.")
+                    .setPositiveButton("OK", null)
+                    .show();
+        }
+
+        private void showFailurePopup2() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+            builder.setTitle("Pizza Order Unsuccessful")
+                    .setMessage("Please select a pizza size.")
+                    .setPositiveButton("OK", null)
+                    .show();
         }
     }
-
-    private void showSuccessPopup() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Pizza Order Successful")
-                .setMessage("Your pizza order has been added successfully!")
-                .setPositiveButton("OK", null)
-                .show();
-    }
-
-    private void showFailurePopup1() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Pizza Order Unsuccessful")
-                .setMessage("You need at least 3 toppings.")
-                .setPositiveButton("OK", null)
-                .show();
-    }
-
-    private void showFailurePopup2() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Pizza Order Unsuccessful")
-                .setMessage("Please select a pizza size.")
-                .setPositiveButton("OK", null)
-                .show();
-    }
-
 
     private void showAlert(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -278,8 +267,5 @@ public class fragment_byo_pizzas extends Fragment {
                 .setPositiveButton("OK", null)
                 .show();
     }
-
-
-
 
 }

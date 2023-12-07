@@ -7,4 +7,19 @@
     <string name="button_store_orders">Lets Make Some Pizzas</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="byo_pizza_title">Build Your Own Pizza!</string>
+    <string name="byo_pizza_size">Pizza Size</string>
+    <string name="byo_sauce">Sauce</string>
+    <string name="byo_extra_sauce">Extra Sauce</string>
+    <string name="byo_additional_toppings">Additional Toppings</string>
+    <string name="byo_selected_toppings">Selected Toppings</string>
+    <string name="byo_add_toppings">Add >></string>
+    <string name="byo_remove">Remove</string>
+    <string name="byo_price">Price: $</string>
+    <string name="byo_add_to_order">Add to order!</string>
+    <string name="byo_tomato">Tomato</string>
+    <string name="byo_alfredo">Alfredo</string>
+    <string name="byo_extra_cheese">Extra Cheese</string>
+
 </resources>
