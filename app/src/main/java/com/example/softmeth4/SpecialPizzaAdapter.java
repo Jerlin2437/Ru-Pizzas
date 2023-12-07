@@ -1,30 +1,37 @@
 package com.example.softmeth4;
 
-import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.softmeth4.businesslogic.Order;
+import com.example.softmeth4.businesslogic.PizzaMaker;
 import com.example.softmeth4.pizzas.Pizza;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SpecialPizzaAdapter extends RecyclerView.Adapter<SpecialPizzaAdapter.ViewHolder> {
+    private Pizza pizza;
+    private Order order;
+    private List<String> pizzaList;
 
-    private List<Pizza> specialPizzaList;
-    private Context context;
-
-    public SpecialPizzaAdapter(List<Pizza> specialPizzaList, Context context) {
-        this.specialPizzaList = specialPizzaList;
-        this.context = context;
+    public SpecialPizzaAdapter(List<String> pizzaList) {
+        this.pizzaList = pizzaList;
+        this.pizza = null;
+        this.order = Order.getInstance();
     }
 
     @NonNull
@@ -36,36 +43,87 @@ public class SpecialPizzaAdapter extends RecyclerView.Adapter<SpecialPizzaAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Pizza specialPizza = specialPizzaList.get(position);
+        String pizzaName = pizzaList.get(position);
 
-        // Set data to views in the ViewHolder based on specialPizza
+        // Set data to views in the ViewHolder based on pizzaName
+        holder.pizzaName.setText(pizzaName);
 
-        // For example:
-        // holder.checkBoxExtraSauce.setChecked(specialPizza.isExtraSauceSelected());
-        // holder.checkBoxExtraCheese.setChecked(specialPizza.isExtraCheeseSelected());
-        // holder.radioButtonSmall.setChecked(specialPizza.isSmallSizeSelected());
-        // ... and so on
+        // Initialize views and set listeners
+        holder.checkBoxExtraSauce.setOnCheckedChangeListener((buttonView, isChecked) -> updatePrice(holder));
+        holder.checkBoxExtraCheese.setOnCheckedChangeListener((buttonView, isChecked) -> updatePrice(holder));
+        holder.sizeGroup.setOnCheckedChangeListener((group, checkedId) -> updatePrice(holder));
 
-        // Set other data and event listeners as needed
+        holder.addToOrderButton.setOnClickListener(v -> {
+            int quantity = Integer.parseInt(holder.quantitySpinner.getSelectedItem().toString());
+            pizza = pizzaParse(holder);
+            updatePrice(holder);
+            for (int x = 0; x < quantity; x++)
+                order.addPizza(pizza);
+     //       Log.d("OrderInfo", order.toString());
+        });
+
+        pizza = pizzaParse(holder);
+        updatePrice(holder);
     }
 
     @Override
     public int getItemCount() {
-        return specialPizzaList.size();
+        return pizzaList.size();
     }
 
+    private void updatePrice(@NonNull ViewHolder holder){
+        if (pizza != null) {
+            pizza = pizzaParse(holder);
+            //base price without toppings
+            double basePrice = pizza.price();
+
+            String formattedValue = String.format("%.2f", basePrice);
+            holder.priceTextView.setText(formattedValue);
+        }
+    }
+    private Pizza pizzaParse(@NonNull ViewHolder holder) {
+        String selectedPizza = holder.pizzaName.getText().toString();
+        String extraSauceCheck = "false";
+        String extraCheeseCheck = "false";
+        int selectedRadioButtonId = holder.sizeGroup.getCheckedRadioButtonId();
+        RadioButton selectedRadioButton = holder.itemView.findViewById(selectedRadioButtonId);
+        String selectedSize = selectedRadioButton.getText().toString();
+        if(holder.checkBoxExtraSauce.isChecked())
+            extraSauceCheck = "true";
+        if (holder.checkBoxExtraCheese.isChecked())
+            extraCheeseCheck = "true";
+        return PizzaMaker.createPizza(selectedPizza + " " + selectedSize + " " + extraSauceCheck + " " + extraCheeseCheck);
+    }
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        Pizza pizza;
+        private List<String> quantity = Arrays.asList("1", "2", "3", "4");
         CheckBox checkBoxExtraSauce;
         CheckBox checkBoxExtraCheese;
-        RadioButton radioButtonSmall;
+        Button addToOrderButton;
+        TextView priceTextView;
+        ImageView pizzaImageView;
+        Spinner quantitySpinner;
+        TextView pizzaName;
+        RadioGroup sizeGroup;
         // Add other views as needed
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             checkBoxExtraSauce = itemView.findViewById(R.id.extraSauce);
             checkBoxExtraCheese = itemView.findViewById(R.id.extraCheese);
-            radioButtonSmall = itemView.findViewById(R.id.specialtySmall);
+            addToOrderButton = itemView.findViewById(R.id.addToOrder);
+            priceTextView = itemView.findViewById(R.id.price);
+            pizzaImageView = itemView.findViewById(R.id.pizzaPicture);
+            quantitySpinner = itemView.findViewById(R.id.quantitySpinner);
+            pizzaName = itemView.findViewById(R.id.pizzaName);
+            sizeGroup = itemView.findViewById(R.id.specialtyRadioButtonGroup);
             // Initialize other views
+            ArrayAdapter<String> quantityAdapter = new ArrayAdapter<>(itemView.getContext(),
+                    android.R.layout.simple_spinner_item, quantity);
+            quantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            quantitySpinner.setAdapter(quantityAdapter);
+
+
         }
     }
 }

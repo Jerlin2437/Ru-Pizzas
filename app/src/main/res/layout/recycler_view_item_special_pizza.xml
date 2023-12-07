@@ -67,8 +67,8 @@
         android:layout_height="50dp"
         android:layout_below="@+id/pizzaPicture"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="18dp" />
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="20dp" />
 
     <TextView
         android:id="@+id/textView23"
@@ -90,6 +90,35 @@
         android:textAllCaps="false"
         android:textSize="24sp" />
 
+    <RadioGroup
+        android:id="@+id/specialtyRadioButtonGroup"
+        android:layout_width="130dp"
+        android:layout_height="161dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/specialtySmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Small" />
+
+        <RadioButton
+            android:id="@+id/specialtyMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Medium" />
+
+        <RadioButton
+            android:id="@+id/specialtyLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Large" />
+    </RadioGroup>
     <!-- Add other views as needed -->
 
 </RelativeLayout>
