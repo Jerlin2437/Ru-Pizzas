@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Jerlin Yuen, Jason Lei
  */
-public class StoreOrders {
+public final class StoreOrders {
     private static StoreOrders instance;
     private static int nextOrderNum;
     private final ArrayList<Order> orders;
@@ -30,7 +30,7 @@ public class StoreOrders {
      *
      * @return The singleton instance.
      */
-    public static StoreOrders getInstance() {
+    public static synchronized StoreOrders getInstance() {
         if (instance == null) {
             instance = new StoreOrders();
         }

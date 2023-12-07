@@ -1,0 +1,95 @@
+<!-- The layout for each item in the RecyclerView -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- Add other views as needed, such as radio buttons, text views, image views, etc. -->
+
+    <CheckBox
+        android:id="@+id/extraSauce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="337dp"
+        android:text="Extra Sauce" />
+
+    <CheckBox
+        android:id="@+id/extraCheese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/extraSauce"
+        android:layout_marginTop="-2dp"
+        android:text="Extra Cheese" />
+
+    <Button
+        android:id="@+id/addToOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/price"
+        android:layout_marginTop="5dp"
+        android:text="Add to order!" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="58dp"
+        android:layout_height="33dp"
+        android:layout_below="@id/extraCheese"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="211dp"
+        android:text="0.00" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="71dp"
+        android:layout_height="34dp"
+        android:layout_below="@+id/extraCheese"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:text="Price: $" />
+
+    <ImageView
+        android:id="@+id/pizzaPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="106dp"
+        app:srcCompat="@drawable/pepperonipizza" />
+
+    <Spinner
+        android:id="@+id/quantitySpinner"
+        android:layout_width="266dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/pizzaPicture"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="18dp" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="76dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/pizzaPicture"
+        android:layout_marginTop="95dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toStartOf="@+id/quantitySpinner"
+        android:text="Quantity: " />
+
+    <TextView
+        android:id="@+id/pizzaName"
+        android:layout_width="98dp"
+        android:layout_height="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="235dp"
+        android:text="Pizza"
+        android:textAllCaps="false"
+        android:textSize="24sp" />
+
+    <!-- Add other views as needed -->
+
+</RelativeLayout>

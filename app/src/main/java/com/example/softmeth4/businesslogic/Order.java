@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Jerlin Yuen, Jason Lei
  */
-public class Order {
+public final class Order {
     private static final double TAX_RATE = 0.06625;
     private static Order instance;
     private int orderNumber;
@@ -36,7 +36,7 @@ public class Order {
      *
      * @return The singleton instance.
      */
-    public static Order getInstance() {
+    public static synchronized Order getInstance() {
         if (instance == null) {
             instance = new Order();
         }
