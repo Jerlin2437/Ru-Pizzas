@@ -8,16 +8,6 @@
     android:background="#E0F7FA"
     tools:context=".fragment_store_orders" >
 
-    <Button
-        android:id="@+id/refreshStoreOrders"
-        android:layout_width="148dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="20dp"
-        android:text="Refresh Orders"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cancelOrder" />
-
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
@@ -58,19 +48,6 @@
         app:layout_constraintStart_toEndOf="@+id/allOrders"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-    <EditText
-        android:id="@+id/storeOrderTotal"
-        android:layout_width="78dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:editable="false"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
     <ListView
         android:id="@+id/displayStoreOrders"
         android:layout_width="407dp"
@@ -84,19 +61,19 @@
         android:id="@+id/cancelOrder"
         android:layout_width="151dp"
         android:layout_height="53dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="20dp"
         android:text="Cancel Order"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayStoreOrders" />
 
-    <Button
-        android:id="@+id/exportStoreOrders"
-        android:layout_width="168dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:text="Export Store Orders"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/displayStoreOrders" />
+    <TextView
+        android:id="@+id/orderTotalCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="67dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
