@@ -97,31 +97,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
-    <Button
-        android:id="@+id/addTopping"
-        android:layout_width="99dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
-        android:text="@string/byo_add_toppings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/selectedToppings"
-        app:layout_constraintStart_toEndOf="@+id/notSelectedToppings"
-        app:layout_constraintTop_toBottomOf="@+id/buildSpinner"
-        app:layout_constraintVertical_bias="0.426" />
-
-    <Button
-        android:id="@+id/removeTopping"
-        android:layout_width="100dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="12dp"
-        android:text="@string/byo_remove"
-        app:layout_constraintEnd_toStartOf="@+id/selectedToppings"
-        app:layout_constraintStart_toEndOf="@+id/notSelectedToppings"
-        app:layout_constraintTop_toBottomOf="@+id/addTopping" />
-
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
@@ -172,12 +147,12 @@
         app:layout_constraintTop_toBottomOf="@+id/buildExtraSauce" />
 
     <TextView
-        android:id="@+id/buildPrice"
+        android:id="@+id/buildPriceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:text="0.00"
+        android:text="@string/byo_build_price"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/notSelectedToppings" />
 

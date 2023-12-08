@@ -21,5 +21,6 @@
     <string name="byo_tomato">Tomato</string>
     <string name="byo_alfredo">Alfredo</string>
     <string name="byo_extra_cheese">Extra Cheese</string>
+    <string name="byo_build_price">0.00</string>
 
 </resources>

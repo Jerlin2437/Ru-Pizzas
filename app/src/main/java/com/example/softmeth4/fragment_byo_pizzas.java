@@ -1,36 +1,29 @@
 package com.example.softmeth4;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.softmeth4.businesslogic.Order;
 import com.example.softmeth4.businesslogic.PizzaMaker;
-import com.example.softmeth4.enums.Topping;
 import com.example.softmeth4.pizzas.Pizza;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -43,6 +36,7 @@ public class fragment_byo_pizzas extends Fragment {
     private static final int MAX_TOPPING = 7;
     private static final double TOPPING_PRICE = 1.49;
     private static final double MORESAUCECHEESE = 1.0;
+    private List<String> pizzaList;
     private Order order;
     private Pizza pizza;
     private View view;
@@ -50,8 +44,6 @@ public class fragment_byo_pizzas extends Fragment {
     private CheckBox buildExtraCheeseButton;
     private CheckBox buildExtraSauceButton;
     private TextView buildPrice;
-    private Button addTopping;
-    private Button removeTopping;
     private Button buildAddToOrder;
     private RadioGroup sauceRadioGroup;
 
@@ -70,7 +62,8 @@ public class fragment_byo_pizzas extends Fragment {
     private double additionalToppingPrice;
 
     public fragment_byo_pizzas() {
-        // Required empty public constructor
+        this.pizza = null;
+        this.order = Order.getInstance();
     }
 
     @Override
@@ -83,35 +76,35 @@ public class fragment_byo_pizzas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_byo_pizzas, container, false);
-
         setupSizeSpinner();
         setupToppingsListViews();
+        setupButtonsEtc();
 
-        buildExtraCheeseButton = view.findViewById(R.id.buildExtraCheese);
-        buildExtraSauceButton = view.findViewById(R.id.buildExtraSauce);
-        buildPrice = view.findViewById(R.id.buildPrice);
-        buildAddToOrder = view.findViewById(R.id.buildAddToOrder);
-        sauceRadioGroup = view.findViewById(R.id.sauceRadioGroup);
-
-        notSelectedToppingsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedTopping = notSelectedToppingsAdapter.getItem(position);
-                addTopping(selectedTopping);
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                updatePizzaPrice();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                //if nothing is done, small is the default selection
+                updatePizzaPrice();
             }
         });
 
-        selectedToppingsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedTopping = selectedToppingsAdapter.getItem(position);
-                removeTopping(selectedTopping);
-            }
+        notSelectedToppingsList.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedTopping = notSelectedToppingsAdapter.getItem(position);
+            addTopping(selectedTopping);
         });
 
+        selectedToppingsList.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedTopping = selectedToppingsAdapter.getItem(position);
+            removeTopping(selectedTopping);
+        });
+
+        sauceRadioGroup.setOnCheckedChangeListener((group, checkedId) -> updatePizzaPrice());
         buildExtraSauceButton.setOnCheckedChangeListener((buttonView, isChecked) -> updatePizzaPrice());
         buildExtraCheeseButton.setOnCheckedChangeListener((buttonView, isChecked) -> updatePizzaPrice());
-
         buildAddToOrder.setOnClickListener(new BuildAddToOrderClickListener());
 
         return view;
@@ -133,6 +126,14 @@ public class fragment_byo_pizzas extends Fragment {
 
         selectedToppingsAdapter = new ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, emptyList);
         selectedToppingsList.setAdapter(selectedToppingsAdapter);
+    }
+
+    private void setupButtonsEtc(){
+        buildExtraCheeseButton = view.findViewById(R.id.buildExtraCheese);
+        buildExtraSauceButton = view.findViewById(R.id.buildExtraSauce);
+        buildPrice = view.findViewById(R.id.buildPriceTextView);
+        buildAddToOrder = view.findViewById(R.id.buildAddToOrder);
+        sauceRadioGroup = view.findViewById(R.id.sauceRadioGroup);
     }
 
     private void addTopping(String selectedTopping){
@@ -157,56 +158,50 @@ public class fragment_byo_pizzas extends Fragment {
 
     private void updatePizzaPrice() {
         if (pizza != null) {
-            if (toppingCount >= MIN_TOPPING) {
-                pizza = pizzaParse();
-                //base price without toppings
-                double basePrice = pizza.price();
-                //if more than 3 toppings, add $1.49 for each additional topping after 3
-                additionalToppingPrice = Math.max(0, toppingCount - MAX_TOPPING) * TOPPING_PRICE;
+            pizza = pizzaParse();
+            //base price without toppings
+            double basePrice = pizza.price();
+            //if more than 3 toppings, add $1.49 for each additional topping after 3
+            additionalToppingPrice = Math.max(0, toppingCount - MAX_TOPPING) * TOPPING_PRICE;
 
-                if (buildExtraSauceButton.isChecked()) {
-                    additionalToppingPrice += MORESAUCECHEESE;
-                }
-
-                if (buildExtraCheeseButton.isChecked()) {
-                    additionalToppingPrice += MORESAUCECHEESE;
-                }
-
-                double totalPrice = basePrice + additionalToppingPrice;
-                String formattedValue = String.format("%.2f", totalPrice);
-                buildPrice.setText(formattedValue);
-            } else {
-                double totalPrice = pizza.price() + additionalToppingPrice;
-                String formattedValue = String.format("%.2f", totalPrice);
-                buildPrice.setText(formattedValue);
+            if (buildExtraSauceButton.isChecked()) {
+                additionalToppingPrice += MORESAUCECHEESE;
             }
+
+            if (buildExtraCheeseButton.isChecked()) {
+                additionalToppingPrice += MORESAUCECHEESE;
+            }
+
+            double totalPrice = basePrice + additionalToppingPrice;
+            String formattedValue = String.format("%.2f", totalPrice);
+            buildPrice.setText(formattedValue);
         }
     }
 
     private Pizza pizzaParse() {
-        String pizzaType = "BYO";
-        String extraSauceCheck = "false";
-        String extraCheeseCheck = "false";
         String size = sizeSpinner.getSelectedItem().toString();
+        String pizzaType = "BYO";
         int selectedRadioButtonId = sauceRadioGroup.getCheckedRadioButtonId();
         RadioButton selectedRadioButton = view.findViewById(selectedRadioButtonId);
         String selectedSauce = selectedRadioButton.getText().toString();
-        if (buildExtraSauceButton.isChecked()){
-            extraSauceCheck = "true";
-        }
-        if (buildExtraCheeseButton.isChecked()){
-            extraCheeseCheck = "true";
-        }
+//        String extraSauceCheck = "false";
+//        String extraCheeseCheck = "false";
+//        if (buildExtraSauceButton.isChecked()){
+//            extraSauceCheck = "true";
+//        }
+//        if (buildExtraCheeseButton.isChecked()){
+//            extraCheeseCheck = "true";
+//        }
 
-        SparseBooleanArray checkedToppings = selectedToppingsList.getCheckedItemPositions();
         StringBuilder allToppings = new StringBuilder();
-
-        for (int i = 0; i < checkedToppings.size(); i++) {
-            if (checkedToppings.valueAt(i)) {
-                allToppings.append(notSelectedToppingsAdapter.getItem(checkedToppings.keyAt(i))).append(" ");
-            }
+        for (int i = 0; i < selectedToppingsAdapter.getCount(); i++) {
+            allToppings.append(selectedToppingsAdapter.getItem(i)).append(" ");
         }
-        return PizzaMaker.createPizza(pizzaType + " " + size + " " + extraSauceCheck + " " + extraCheeseCheck + " " + selectedSauce + " " + allToppings.toString().trim());
+
+//        return PizzaMaker.createPizza(pizzaType + " " + size + " " + extraSauceCheck + " " +
+//                extraCheeseCheck + " " + selectedSauce + " " + allToppings.toString().trim());
+        return PizzaMaker.createPizza(pizzaType + " " + size + " false false " +
+                selectedSauce + " " + allToppings.toString().trim());
     }
 
     private class BuildAddToOrderClickListener implements View.OnClickListener{
