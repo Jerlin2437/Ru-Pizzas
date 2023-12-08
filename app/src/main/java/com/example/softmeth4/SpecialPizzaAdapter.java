@@ -59,7 +59,7 @@ public class SpecialPizzaAdapter extends RecyclerView.Adapter<SpecialPizzaAdapte
             updatePrice(holder);
             for (int x = 0; x < quantity; x++)
                 order.addPizza(pizza);
-     //       Log.d("OrderInfo", order.toString());
+     //       create popup that says pizza added to order
         });
 
         pizza = pizzaParse(holder);

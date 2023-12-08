@@ -50,12 +50,23 @@ public final class Order {
     public void addPizza(Pizza pizza) {
         pizzas.add(pizza);
     }
-
+    public void resetOrder() {
+        pizzas.clear();
+        orderNumber = 0;
+        subTotalValue = 0.0;
+        salesTaxValue = 0.0;
+        orderTotalValue = 0.0;
+        finalSubTotal = null;
+        finalSalesTax = null;
+        finalOrderTotal = null;
+    }
     /**
      * Removes a pizza from the order.
      *
      * @param pizza - pizza from the order
      */
+
+
     public void removePizza(Pizza pizza) {
         pizzas.remove(pizza);
     }
