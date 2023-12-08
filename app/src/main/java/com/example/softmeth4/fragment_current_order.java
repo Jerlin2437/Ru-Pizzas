@@ -32,6 +32,7 @@ public class fragment_current_order extends Fragment {
     private double subtotalValue;
     private double salesTaxValue;
     private double orderTotalValue;
+    private int selectedPosition;
 
     public fragment_current_order() {
         // Required empty public constructor
@@ -56,7 +57,10 @@ public class fragment_current_order extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ListView listView = getView().findViewById(R.id.currentOrderView);
-     //   listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listView.setOnItemClickListener((parent, currentView, position, id) -> {
+            selectedPosition = position;
+        });
         updateCurrentOrderView();
         view.findViewById(R.id.placeOrder).setOnClickListener(v-> placeOrder());
         view.findViewById(R.id.refreshOrder).setOnClickListener(v -> updateCurrentOrderView());
@@ -67,9 +71,8 @@ public class fragment_current_order extends Fragment {
             //showRemoveButEmptyPopup();
         } else {
             ListView listOfPizzas = getView().findViewById(R.id.currentOrderView);
-            int selectedIndex = listOfPizzas.getSelectedItemPosition();
-            if (selectedIndex != ILLEGAL_INDEX) {
-                Pizza selectedPizza = Order.getInstance().getPizzas().get(selectedIndex);
+            if (selectedPosition != ILLEGAL_INDEX) {
+                Pizza selectedPizza = Order.getInstance().getPizzas().get(selectedPosition);
                 Order.getInstance().removePizza(selectedPizza);
                 updateCurrentOrderView();
             //    showRemovedPopup();
