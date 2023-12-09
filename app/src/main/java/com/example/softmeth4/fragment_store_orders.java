@@ -32,6 +32,7 @@ public class fragment_store_orders extends Fragment {
     private TextView finalOrderTotal;
     private ListView displayStoreOrders;
     private Button cancelOrderButton;
+    private Button refreshButton;
 
 
 
@@ -62,10 +63,9 @@ public class fragment_store_orders extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        orderSpinner = view.findViewById(R.id.currentOrderView);
-        finalOrderTotal = getView().findViewById(R.id.orderTotal);
-        displayStoreOrders = getView().findViewById(R.id.displayStoreOrders);
-        cancelOrderButton = getView().findViewById(R.id.cancelOrder);
+        orderSpinner = view.findViewById(R.id.allOrders);
+        finalOrderTotal = view.findViewById(R.id.orderTotalCost);
+        displayStoreOrders = view.findViewById(R.id.displayStoreOrders);
 
         populateSpinner();
 
@@ -96,7 +96,7 @@ public class fragment_store_orders extends Fragment {
 //                displaySelectedOrder();
 //            }
 //        });
-        cancelOrderButton.setOnClickListener(v-> removeOrder());
+        view.findViewById(R.id.cancelOrder).setOnClickListener(v-> removeOrder());
     }
     private void populateSpinner(){
         if (StoreOrders.getInstance().getTotalOrders() != 0) {
@@ -134,7 +134,6 @@ public class fragment_store_orders extends Fragment {
         }
     }
 
-
     private void removeOrder() {
         Spinner orderSpinner = getView().findViewById(R.id.allOrders);
         if (orderSpinner.getSelectedItem() != null) {
@@ -145,6 +144,7 @@ public class fragment_store_orders extends Fragment {
                 ArrayAdapter<String> adapter = (ArrayAdapter<String>) orderSpinner.getAdapter();
                 adapter.remove(orderSpinner.getSelectedItem().toString());
                 adapter.notifyDataSetChanged();
+                finalOrderTotal.setText("0.00");
             } else {
                 showErrorMessage();
             }
