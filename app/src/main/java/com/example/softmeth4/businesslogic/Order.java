@@ -16,7 +16,7 @@ public final class Order {
     private static final double TAX_RATE = 0.06625;
     private static Order instance;
     private int orderNumber;
-    private final ArrayList<Pizza> pizzas;
+    private ArrayList<Pizza> pizzas = new ArrayList<>();
     private double subTotalValue;
     private double salesTaxValue;
     private double orderTotalValue;
@@ -29,6 +29,26 @@ public final class Order {
      */
     private Order() {
         pizzas = new ArrayList<>();
+    }
+    /**
+     * Copy constructor to create a new order instance with the same values.
+     *
+     * @param originalOrder The order to copy.
+     */
+    private Order(Order originalOrder) {
+        // Copy values from the original order
+        this.orderNumber = originalOrder.orderNumber;
+        this.pizzas.addAll(originalOrder.pizzas);
+        // Copy other properties as needed
+    }
+    /**
+     * Factory method to create a new order instance with the same values as the current order.
+     *
+     * @return A new order instance.
+     */
+    public static Order createNewOrder() {
+        Order currentOrder = getInstance();
+        return new Order(currentOrder);
     }
 
     /**

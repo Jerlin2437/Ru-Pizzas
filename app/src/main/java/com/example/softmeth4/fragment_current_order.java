@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.ObservableList;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,9 +85,9 @@ public class fragment_current_order extends Fragment {
         if (!order.getPizzas().isEmpty() && listOfPizzas.getCount() == order.getPizzas().size()) {
             //showAddedPopup();
             updateCurrentOrderView();
-            storeOrders.addOrder(Order.getInstance());
+            Order currentOrder = Order.createNewOrder();
+            StoreOrders.getInstance().addOrder(currentOrder);
             Order.getInstance().resetOrder();
-
             updateCurrentOrderView();
         } else {
             //showEmptyPopup();

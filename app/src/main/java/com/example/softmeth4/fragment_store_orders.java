@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class fragment_store_orders extends Fragment {
         super.onCreate(savedInstanceState);
         storeOrders = StoreOrders.getInstance();
         order = Order.getInstance();
+        Log.d("Handle!", storeOrders.toString());
     }
 
     @Override
@@ -51,22 +53,22 @@ public class fragment_store_orders extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Spinner orderSpinner = view.findViewById(R.id.currentOrderView);
-        if (orderSpinner != null) {
-            populateSpinner();
-        } else {
-            // Log an error or handle appropriately if the Spinner is null
-        }
+
+        populateSpinner();
+
     }
     private void populateSpinner(){
-        Spinner orderSpinner = getView().findViewById(R.id.currentOrderView);
-        List<String> orders= new ArrayList<String>();
-        for (int x = 0; x < StoreOrders.getInstance().getTotalOrders(); x++){
-            orders.add(String.valueOf(storeOrders.getOrders().get(x).getOrderNumber()));
-        }
+        if (StoreOrders.getInstance().getTotalOrders() != 0) {
+            Spinner orderSpinner = getView().findViewById(R.id.allOrders);
+            List<String> orders = new ArrayList<>();
+            for (int x = 0; x < StoreOrders.getInstance().getTotalOrders(); x++) {
+                orders.add(String.valueOf(StoreOrders.getInstance().getOrders().get(x).getOrderNumber()));
+            }
 
-        ArrayAdapter<String> orderArrayAdapter = new ArrayAdapter<>(getView().getContext(),
-                android.R.layout.simple_spinner_item, orders);
-        orderArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        orderSpinner.setAdapter(orderArrayAdapter);
+            ArrayAdapter<String> orderArrayAdapter = new ArrayAdapter<>(getView().getContext(),
+                    android.R.layout.simple_spinner_item, orders);
+            orderArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            orderSpinner.setAdapter(orderArrayAdapter);
+        }
     }
 }
