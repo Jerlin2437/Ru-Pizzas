@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.softmeth4.businesslogic.Order;
 import com.example.softmeth4.businesslogic.PizzaMaker;
@@ -258,11 +259,7 @@ public class fragment_byo_pizzas extends Fragment {
         }
 
         private void showFailurePopup1() {
-            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-            builder.setTitle("Pizza Order Unsuccessful")
-                    .setMessage("You need at least 3 toppings.")
-                    .setPositiveButton("OK", null)
-                    .show();
+            showToast("Pizza Order Unsuccessful - You need at least 3 toppings.");
         }
 
 //        private void showFailurePopup2() {
@@ -280,6 +277,10 @@ public class fragment_byo_pizzas extends Fragment {
                 .setMessage(message)
                 .setPositiveButton("OK", null)
                 .show();
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
 
 }

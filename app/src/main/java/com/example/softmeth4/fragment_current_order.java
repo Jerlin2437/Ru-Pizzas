@@ -1,5 +1,6 @@
 package com.example.softmeth4;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.softmeth4.businesslogic.Order;
 import com.example.softmeth4.businesslogic.StoreOrders;
@@ -69,28 +71,28 @@ public class fragment_current_order extends Fragment {
     }
     private void removePizza(){
         if (Order.getInstance().getPizzas().isEmpty()) {
-            //showRemoveButEmptyPopup();
+            showRemoveButEmptyPopup();
         } else {
             ListView listOfPizzas = getView().findViewById(R.id.currentOrderView);
             if (selectedPosition != ILLEGAL_INDEX) {
                 Pizza selectedPizza = Order.getInstance().getPizzas().get(selectedPosition);
                 Order.getInstance().removePizza(selectedPizza);
                 updateCurrentOrderView();
-            //    showRemovedPopup();
+                showRemovedPopup();
             }
         }
     }
     private void placeOrder() {
         ListView listOfPizzas = getView().findViewById(R.id.currentOrderView);
         if (!order.getPizzas().isEmpty() && listOfPizzas.getCount() == order.getPizzas().size()) {
-            //showAddedPopup();
+            showAddedPopup();
             updateCurrentOrderView();
             Order currentOrder = Order.createNewOrder();
             StoreOrders.getInstance().addOrder(currentOrder);
             Order.getInstance().resetOrder();
             updateCurrentOrderView();
         } else {
-            //showEmptyPopup();
+            showEmptyPopup();
         }
     }
     private void updateCurrentOrderView() {
@@ -139,5 +141,37 @@ public class fragment_current_order extends Fragment {
         orderTotalValue = subtotalValue + salesTaxValue;
         TextView orderTotal = getView().findViewById(R.id.orderTotal);
         orderTotal.setText(String.format("%.2f", orderTotalValue));
+    }
+
+    //show removedpopup - pizza removed successfully (alert dialog)
+    private void showRemovedPopup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Pizza Removed Successfully")
+                .setMessage("Pizza Removed!")
+                .setPositiveButton("OK", null)
+                .show();
+    }
+
+    //show addedpopup - pizza order added successfully, order placed! (alert dialog)
+    private void showAddedPopup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Pizza Order Added Successfully")
+                .setMessage("Order placed!")
+                .setPositiveButton("OK", null)
+                .show();
+    }
+
+    // showemptypopup - not all pizzas are in the order yet! Not all pizzas have been added to the order yet! (toast message)
+    private void showEmptyPopup(){
+        showToast("Not all pizzas have been added to the order yet! Please consider refreshing.");
+    }
+
+    //show removebutempty popup - there are no pizzas in the order to remove. no pizzas in the order (toast message)
+    private void showRemoveButEmptyPopup(){
+        showToast("There are no pizzas in the order to remove.");
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }
 }
