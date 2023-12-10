@@ -173,8 +173,6 @@ public class fragment_byo_pizzas extends Fragment {
             if (pizza != null) {
                 double basePrice = pizza.price();
 
-                // Calculate additional topping price only if more than 3 toppings are selected
-                additionalToppingPrice = Math.max(0, toppingCount - MIN_TOPPING) * TOPPING_PRICE;
 
 //                // Add extra sauce/cheese price if selected, not sure if needed, it adds x2 MORESAUCECHEESE to display
 //                if (buildExtraSauceButton.isChecked()) {
@@ -185,7 +183,7 @@ public class fragment_byo_pizzas extends Fragment {
 //                    additionalToppingPrice += MORESAUCECHEESE;
 //                }
 
-                double totalPrice = basePrice + additionalToppingPrice;
+                double totalPrice = basePrice;
                 String formattedValue = String.format("%.2f", totalPrice);
                 buildPrice.setText(formattedValue);
             }

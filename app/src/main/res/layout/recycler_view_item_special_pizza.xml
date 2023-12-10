@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="337dp"
+        android:layout_marginTop="515dp"
         android:text="Extra Sauce" />
 
     <CheckBox
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/price"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="9dp"
         android:text="Add to order!" />
 
     <TextView
@@ -53,12 +53,13 @@
 
     <ImageView
         android:id="@+id/pizzaPicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="106dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/pepperonipizza" />
 
     <Spinner
@@ -67,25 +68,27 @@
         android:layout_height="50dp"
         android:layout_below="@+id/pizzaPicture"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="79dp"
-        android:layout_marginEnd="20dp" />
+        android:layout_marginTop="326dp"
+        android:layout_marginEnd="2dp" />
 
     <TextView
         android:id="@+id/textView23"
         android:layout_width="76dp"
         android:layout_height="40dp"
         android:layout_below="@+id/pizzaPicture"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="340dp"
+        android:layout_marginEnd="19dp"
         android:layout_toStartOf="@+id/quantitySpinner"
         android:text="Quantity: " />
 
     <TextView
         android:id="@+id/pizzaName"
-        android:layout_width="98dp"
-        android:layout_height="31dp"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="235dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="58dp"
         android:text="Pizza"
         android:textAllCaps="false"
         android:textSize="24sp" />
@@ -96,8 +99,8 @@
         android:layout_height="161dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="350dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginTop="514dp"
+        android:layout_marginEnd="55dp"
         app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
@@ -119,6 +122,26 @@
             android:layout_height="wrap_content"
             android:text="Large" />
     </RadioGroup>
+
+    <ListView
+        android:id="@+id/toppings"
+        android:layout_width="251dp"
+        android:layout_height="290dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="145dp"
+        android:layout_marginEnd="7dp" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/pizzaName"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="15dp"
+        android:layout_toStartOf="@+id/toppings"
+        android:text="Toppings: "
+        android:textSize="20sp" />
     <!-- Add other views as needed -->
 
 </RelativeLayout>

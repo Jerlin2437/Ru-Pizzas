@@ -62,6 +62,10 @@ public abstract class Pizza {
         return pizzaString;
     }
 
+    public ArrayList<Topping> getToppings() {
+        return toppings;
+    }
+
     /**
      * Getter method (accessor)
      *

@@ -17,6 +17,7 @@ public class Cheese extends Pizza{
      */
     public Cheese(Size size, boolean extraSauce, boolean extraCheese) {
         super(size, extraSauce, extraCheese);
+        toppings.add(Topping.ONION);
         sauce = Sauce.TOMATO;
     }
 

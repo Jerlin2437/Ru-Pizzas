@@ -1,6 +1,7 @@
 package com.example.softmeth4;
 
 import android.app.AlertDialog;
+import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -20,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.softmeth4.businesslogic.Order;
 import com.example.softmeth4.businesslogic.PizzaMaker;
+import com.example.softmeth4.enums.Topping;
 import com.example.softmeth4.pizzas.Pizza;
 
 import java.security.AccessController;
@@ -30,11 +34,13 @@ public class SpecialPizzaAdapter extends RecyclerView.Adapter<SpecialPizzaAdapte
     private Pizza pizza;
     private Order order;
     private List<String> pizzaList;
+    private List<String> pizzaPicture;
 
-    public SpecialPizzaAdapter(List<String> pizzaList) {
+    public SpecialPizzaAdapter(List<String> pizzaList, List<String> pizzaPicture) {
         this.pizzaList = pizzaList;
         this.pizza = null;
         this.order = Order.getInstance();
+        this.pizzaPicture = pizzaPicture;
     }
 
     @NonNull
@@ -65,8 +71,12 @@ public class SpecialPizzaAdapter extends RecyclerView.Adapter<SpecialPizzaAdapte
      //       create popup that says pizza added to order
             showToast(holder, "Your pizza order has been added successfully!");
         });
-
+        String imageName = pizzaPicture.get(position);
+        holder.bind(imageName);
         pizza = pizzaParse(holder);
+
+        ArrayAdapter<Topping> listViewAdapter = new ArrayAdapter<>(holder.itemView.getContext(), android.R.layout.simple_list_item_1, pizza.getToppings());
+        holder.toppings.setAdapter(listViewAdapter);
         updatePrice(holder);
     }
 
@@ -112,6 +122,7 @@ public class SpecialPizzaAdapter extends RecyclerView.Adapter<SpecialPizzaAdapte
         ImageView pizzaImageView;
         Spinner quantitySpinner;
         TextView pizzaName;
+        ListView toppings;
         RadioGroup sizeGroup;
         // Add other views as needed
 
@@ -125,13 +136,19 @@ public class SpecialPizzaAdapter extends RecyclerView.Adapter<SpecialPizzaAdapte
             quantitySpinner = itemView.findViewById(R.id.quantitySpinner);
             pizzaName = itemView.findViewById(R.id.pizzaName);
             sizeGroup = itemView.findViewById(R.id.specialtyRadioButtonGroup);
-            // Initialize other views
+            toppings = itemView.findViewById(R.id.toppings);
             ArrayAdapter<String> quantityAdapter = new ArrayAdapter<>(itemView.getContext(),
                     android.R.layout.simple_spinner_item, quantity);
             quantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             quantitySpinner.setAdapter(quantityAdapter);
-
-
         }
+        public void bind(String imageName) {
+            int resourceId = itemView.getContext().getResources().getIdentifier(imageName, "drawable", itemView.getContext().getPackageName());
+
+            if (resourceId != 0) {
+                pizzaImageView.setImageResource(resourceId);
+            }
+        }
+
     }
 }
