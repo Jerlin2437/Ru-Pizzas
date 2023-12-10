@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pizzaapp</string>
+    <string name="app_name">J &amp; J Pizzeria</string>
 
     <string name="button_specialty">Specialty</string>
     <string name="button_byo">BYO</string>
@@ -8,6 +8,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+<!--    for byo hardcoded text-->
     <string name="byo_pizza_title">Build Your Own Pizza!</string>
     <string name="byo_pizza_size">Pizza Size</string>
     <string name="byo_sauce">Sauce</string>
@@ -22,5 +23,39 @@
     <string name="byo_alfredo">Alfredo</string>
     <string name="byo_extra_cheese">Extra Cheese</string>
     <string name="byo_build_price">0.00</string>
+
+<!--    for current order hardcoded text-->
+    <string name="current_order_refresh">Refresh Order</string>
+    <string name="current_order_remove">Remove Pizza</string>
+    <string name="current_order_subtotal">subtotal</string>
+    <string name="current_order_total">order total</string>
+    <string name="current_order_title">Current Pizza Order</string>
+    <string name="current_order_number">Order Number:</string>
+    <string name="current_order_subtotal_title">Subtotal: $</string>
+    <string name="current_order_sales_tax">sales tax</string>
+    <string name="current_order_sales_tax_title">Sales Tax: $</string>
+    <string name="current_order_total_title">Order Total: $</string>
+    <string name="current_order_place_order">Place Order</string>
+    <string name="current_order_initial_num">0</string>
+
+<!--    for store orders hardcoded text-->
+    <string name="store_orders_title">Store Orders</string>
+    <string name="store_orders_number_title">Order Number:</string>
+    <string name="store_orders_total_title">Order Total: $</string>
+    <string name="store_orders_cancel_order">Cancel Order</string>
+    <string name="store_orders_total">0.00</string>
+
+<!--    for specialty pizzas hardcoded text-->
+    <string name="specialty_pizza_extra_sauce">Extra Sauce</string>
+    <string name="specialty_pizza_extra_cheese">Extra Cheese</string>
+    <string name="specialty_pizza_add_to_order">Add to order!</string>
+    <string name="specialty_pizza_price">0.00</string>
+    <string name="specialty_pizza_price_title">Price: $</string>
+    <string name="specialty_pizza_quantity">Quantity: </string>
+    <string name="specialty_pizza_pizza_name">Pizza</string>
+    <string name="specialty_pizza_small">Small</string>
+    <string name="specialty_pizza_medium">Medium</string>
+    <string name="specialty_pizza_large">Large</string>
+    <string name="specialty_pizza_toppings">Toppings: </string>
 
 </resources>
