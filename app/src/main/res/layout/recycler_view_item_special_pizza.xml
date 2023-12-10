@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="515dp"
+        android:layout_marginTop="465dp"
         android:text="Extra Sauce" />
 
     <CheckBox
@@ -68,15 +68,15 @@
         android:layout_height="50dp"
         android:layout_below="@+id/pizzaPicture"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="326dp"
-        android:layout_marginEnd="2dp" />
+        android:layout_marginTop="266dp"
+        android:layout_marginEnd="18dp" />
 
     <TextView
         android:id="@+id/textView23"
-        android:layout_width="76dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
         android:layout_below="@+id/pizzaPicture"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="278dp"
         android:layout_marginEnd="19dp"
         android:layout_toStartOf="@+id/quantitySpinner"
         android:text="Quantity: " />
@@ -99,8 +99,8 @@
         android:layout_height="161dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="514dp"
-        android:layout_marginEnd="55dp"
+        android:layout_marginTop="457dp"
+        android:layout_marginEnd="51dp"
         app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
@@ -125,20 +125,20 @@
 
     <ListView
         android:id="@+id/toppings"
-        android:layout_width="251dp"
-        android:layout_height="290dp"
+        android:layout_width="256dp"
+        android:layout_height="218dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="145dp"
-        android:layout_marginEnd="7dp" />
+        android:layout_marginEnd="9dp" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="49dp"
         android:layout_below="@+id/pizzaName"
-        android:layout_marginTop="170dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="5dp"
         android:layout_toStartOf="@+id/toppings"
         android:text="Toppings: "
         android:textSize="20sp" />

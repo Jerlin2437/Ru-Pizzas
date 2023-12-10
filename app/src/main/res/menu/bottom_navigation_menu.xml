@@ -4,24 +4,24 @@
     <item
         android:id="@+id/navigation_special_pizzas"
         android:title="Special Pizzas"
-        android:icon="@drawable/pepperonipizza" />
+        android:icon="@drawable/baseline_local_pizza_24" />
 
     <!-- Item for BYO Pizzas -->
     <item
         android:id="@+id/navigation_byo_pizzas"
         android:title="BYO Pizzas"
-        android:icon="@drawable/download" />
+        android:icon="@drawable/baseline_build_24" />
 
     <!-- Item for Current Order -->
     <item
         android:id="@+id/navigation_current_order"
         android:title="Current Order"
-        android:icon="@drawable/download" />
+        android:icon="@drawable/baseline_dvr_24" />
 
     <!-- Item for Store Orders -->
     <item
         android:id="@+id/navigation_store_orders"
         android:title="Store Orders"
-        android:icon="@drawable/download" />
+        android:icon="@drawable/baseline_store_24" />
 
 </menu>
