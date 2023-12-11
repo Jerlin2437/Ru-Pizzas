@@ -4,7 +4,14 @@ import com.example.softmeth4.enums.Sauce;
 import com.example.softmeth4.enums.Size;
 import com.example.softmeth4.enums.Topping;
 
-public class Korean extends Pizza{
+/**
+ * This class represents a Korean pizza a customer can order,
+ * containing methods to return information about a pizza and its price after adding
+ * toppings, its size, and extra sauce/cheese.
+ *
+ * @author Jerlin Yuen, Jason Lei
+ */
+public class Korean extends Pizza {
     private static final double PRICE = 13.99;
 
     /**

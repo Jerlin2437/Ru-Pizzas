@@ -4,7 +4,14 @@ import com.example.softmeth4.enums.Sauce;
 import com.example.softmeth4.enums.Size;
 import com.example.softmeth4.enums.Topping;
 
-public class Cheese extends Pizza{
+/**
+ * This class represents a cheese pizza a customer can order,
+ * containing methods to return information about a pizza and its price after adding
+ * toppings, its size, and extra sauce/cheese.
+ *
+ * @author Jerlin Yuen, Jason Lei
+ */
+public class Cheese extends Pizza {
     private static final double PRICE = 8.99;
 
     /**
