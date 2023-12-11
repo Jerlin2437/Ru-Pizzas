@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Store Orders"
+        android:text="@string/store_orders_title"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="Order Number:"
+        android:text="@string/store_orders_number_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="Order Total: $"
+        android:text="@string/store_orders_total_title"
         app:layout_constraintStart_toEndOf="@+id/allOrders"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -63,7 +63,7 @@
         android:layout_height="53dp"
         android:layout_marginStart="108dp"
         android:layout_marginTop="20dp"
-        android:text="Cancel Order"
+        android:text="@string/store_orders_cancel_order"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/displayStoreOrders" />
 
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="67dp"
-        android:text="0.00"
+        android:text="@string/store_orders_total"
         app:layout_constraintStart_toEndOf="@+id/textView18"
         app:layout_constraintTop_toTopOf="parent" />
 

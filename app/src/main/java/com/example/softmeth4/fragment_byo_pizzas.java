@@ -2,9 +2,6 @@ package com.example.softmeth4;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.softmeth4.businesslogic.Order;
 import com.example.softmeth4.businesslogic.PizzaMaker;
 import com.example.softmeth4.pizzas.Pizza;
@@ -28,9 +27,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the factory method to
- * create an instance of this fragment.
+ * This class is a fragment class that serves as a menu for building custom pizzas in the pizza app.
+ * The class contains UI components such as checkboxes, spinners, and listviews the user can interact with
+ * to choose toppings, as well as methods to calculate and display the price of the custom pizza based on selected
+ * options, and display alert dialogs and toast message when necessary.
+ *
+ * @author Jason Lei, Jerlin Yuen
  */
 public class fragment_byo_pizzas extends Fragment {
     private static final int MIN_TOPPING = 3;
@@ -54,24 +56,44 @@ public class fragment_byo_pizzas extends Fragment {
     private ArrayAdapter<String> spinnerAdapter;
     private ArrayAdapter<String> notSelectedToppingsAdapter;
     private ArrayAdapter<String> selectedToppingsAdapter;
-    private List<String> sizeList = Arrays.asList("Small", "Medium", "Large");
-    private List<String> toppingsList = Arrays.asList("Sausage", "Beef", "Pepperoni", "Ham", "Onion", "Green Pepper",
-          "Mushroom", "Black Olive", "Shrimp", "Squid", "Crab Meat", "Spam", "Fish");
-    private List<String> emptyList = new ArrayList<>();
+    private final List<String> sizeList = Arrays.asList("Small", "Medium", "Large");
+    private final List<String> toppingsList = Arrays.asList("Sausage", "Beef", "Pepperoni", "Ham", "Onion", "Green Pepper",
+            "Mushroom", "Black Olive", "Shrimp", "Squid", "Crab Meat", "Spam", "Fish");
+    private final List<String> emptyList = new ArrayList<>();
 
     private int toppingCount;
     private double additionalToppingPrice;
 
+    /**
+     * Default empty constructor
+     */
     public fragment_byo_pizzas() {
         // Required empty public constructor
     }
 
+    /**
+     * General required Android fragment onCreate method called upon creation
+     * Initializes the 'order' variable by getting an instance of the 'Order' class
+     *
+     * @param savedInstanceState saved state
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         order = Order.getInstance();
     }
 
+    /**
+     * Creates and returns the build your own pizza fragment's view.
+     * Inflates the layout defined in 'fragment_byo_pizzas.xml', sets up various views
+     * (buttons, checkboxes, list views) by calling the setupAllViews method, as well as setting up
+     * event listeners for button clicks/checkbox clicks, etc.
+     *
+     * @param inflater           fragment xml class
+     * @param container          container
+     * @param savedInstanceState saved state
+     * @return fragment_byo_pizzas layout view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,6 +105,7 @@ public class fragment_byo_pizzas extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 updatePizzaPrice();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 //if nothing is done, small is the default selection
@@ -114,7 +137,10 @@ public class fragment_byo_pizzas extends Fragment {
         return view;
     }
 
-    private void setupAllViews(){
+    /**
+     * Initializes various UI components (spinners, list views, and buttons) used in the fragment
+     */
+    private void setupAllViews() {
         //set up spinner
         sizeSpinner = view.findViewById(R.id.buildSpinner);
         spinnerAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_item, sizeList);
@@ -139,10 +165,14 @@ public class fragment_byo_pizzas extends Fragment {
         sauceRadioGroup = view.findViewById(R.id.sauceRadioGroup);
     }
 
-    private void addTopping(String selectedTopping){
-        if (selectedToppingsAdapter.getCount() >= MAX_TOPPING){
+    /**
+     * Adds a selected topping to the list of toppings for a custom pizza
+     * Checks for the maximum topping limit and updates the UI when a topping is selected/added.
+     */
+    private void addTopping(String selectedTopping) {
+        if (selectedToppingsAdapter.getCount() >= MAX_TOPPING) {
             showAlert("Too many toppings!", "You can only have a maximum of 7 toppings!");
-        } else{
+        } else {
             String noSpaceTopping = selectedTopping.replace(" ", "_");
 //            selectedToppingsAdapter.add(displayText(noSpaceTopping));
             selectedToppingsAdapter.add(noSpaceTopping);
@@ -153,7 +183,12 @@ public class fragment_byo_pizzas extends Fragment {
         }
     }
 
-    private void removeTopping(String selectedTopping){
+
+    /**
+     * Removes a selected topping from the list of toppings for a custom pizza
+     * and updates the UI when a topping is selected/removed.
+     */
+    private void removeTopping(String selectedTopping) {
         String noSpaceTopping = selectedTopping.replace(" ", "_");
 //        notSelectedToppingsAdapter.add(displayText(noSpaceTopping));
         notSelectedToppingsAdapter.add(noSpaceTopping);
@@ -167,6 +202,10 @@ public class fragment_byo_pizzas extends Fragment {
 //        return topping.replace("_"," ");
 //    }
 
+
+    /**
+     * Updates the display text view buildPrice, representing the subtotal price for the pizza.
+     */
     private void updatePizzaPrice() {
         if (sizeSpinner.getSelectedItem() != null) {
             pizza = pizzaParse();
@@ -190,6 +229,12 @@ public class fragment_byo_pizzas extends Fragment {
         }
     }
 
+
+    /**
+     * Parses the user's selected options and creates a new 'Pizza' object based on user selections
+     * <p>
+     * return a new 'Pizza' object based on selected toppings/user selections
+     */
     private Pizza pizzaParse() {
         String pizzaType = "BYO";
         String size = sizeSpinner.getSelectedItem().toString();
@@ -199,18 +244,18 @@ public class fragment_byo_pizzas extends Fragment {
         RadioButton selectedRadioButton = view.findViewById(selectedRadioButtonId);
         String selectedSauce = selectedRadioButton.getText().toString();
 
-        if (buildExtraSauceButton.isChecked()){
+        if (buildExtraSauceButton.isChecked()) {
             extraSauceCheck = "true";
         }
-        if (buildExtraCheeseButton.isChecked()){
+        if (buildExtraCheeseButton.isChecked()) {
             extraCheeseCheck = "true";
         }
 
         StringBuilder allToppings = new StringBuilder();
-        for (int i = 0; i < selectedToppingsList.getCount(); i++){
+        for (int i = 0; i < selectedToppingsList.getCount(); i++) {
             String topping = (String) selectedToppingsList.getItemAtPosition(i);
             allToppings.append(topping);
-            if (i < selectedToppingsList.getCount() - 1){
+            if (i < selectedToppingsList.getCount() - 1) {
                 allToppings.append(" ");
             }
         }
@@ -219,12 +264,25 @@ public class fragment_byo_pizzas extends Fragment {
                 selectedSauce + " " + allToppings.toString().trim());
     }
 
-    private class BuildAddToOrderClickListener implements View.OnClickListener{
+    /**
+     * An inner class that handles the action event triggered by the buildAddToOrder button
+     */
+    private class BuildAddToOrderClickListener implements View.OnClickListener {
+        /**
+         * Event handler that calls the method addToOrder() when the action event
+         * is triggered (button is pressed)
+         *
+         * @param v view
+         */
         @Override
-        public void onClick(View v){
+        public void onClick(View v) {
             addToOrder();
         }
 
+        /**
+         * Adds the BYO pizza to the order, displaying a success popup if successful,
+         * and a failure popup if it does not meet requirements (ex: pizza does not have at least 3 toppings)
+         */
         private void addToOrder() {
             if (sizeSpinner.getSelectedItem() != null) {
                 if (toppingCount >= MIN_TOPPING) {
@@ -248,6 +306,9 @@ public class fragment_byo_pizzas extends Fragment {
             }
         }
 
+        /**
+         * Displays a success alert dialog/popup with a specific message
+         */
         private void showSuccessPopup() {
             AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
             builder.setTitle("Pizza Order Successful")
@@ -256,6 +317,10 @@ public class fragment_byo_pizzas extends Fragment {
                     .show();
         }
 
+        /**
+         * Displays a failure alert/popup/toast with a specific message if the order does not meet
+         * topping requirements
+         */
         private void showFailurePopup1() {
             showToast("Pizza Order Unsuccessful - You need at least 3 toppings.");
         }
@@ -269,6 +334,9 @@ public class fragment_byo_pizzas extends Fragment {
 //        }
     }
 
+    /**
+     * A general alert dialog message formatted method to display a specific message
+     */
     private void showAlert(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle(title)
@@ -277,6 +345,9 @@ public class fragment_byo_pizzas extends Fragment {
                 .show();
     }
 
+    /**
+     * A general toast message formatted method to display a specific message
+     */
     private void showToast(String message) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
     }

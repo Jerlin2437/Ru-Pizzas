@@ -2,11 +2,6 @@ package com.example.softmeth4;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +12,23 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.softmeth4.businesslogic.Order;
 import com.example.softmeth4.businesslogic.StoreOrders;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * This class is a fragment class that serves as a menu for displaying a list of store orders in the pizza app.
+ * The class provides a way to view, select, and remove store orders.
+ *
+ * @author Jason Lei, Jerlin Yuen
+ */
 
 public class fragment_store_orders extends Fragment {
     private StoreOrders storeOrders;
@@ -34,15 +39,18 @@ public class fragment_store_orders extends Fragment {
     private Button cancelOrderButton;
     private Button refreshButton;
 
-
-
-
+    /**
+     * Default empty constructor
+     */
     public fragment_store_orders() {
         // Required empty public constructor
     }
 
-
-
+    /**
+     * General required Android fragment onCreate method called upon creation
+     *
+     * @param savedInstanceState saved state
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +59,13 @@ public class fragment_store_orders extends Fragment {
         Log.d("Handle!", storeOrders.toString());
     }
 
+    /**
+     * General required Android fragment onCreate method called upon creation.
+     *
+     * @param inflater           fragment_store_orders
+     * @param container          container
+     * @param savedInstanceState saved state
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,6 +75,13 @@ public class fragment_store_orders extends Fragment {
         return view;
     }
 
+    /**
+     * This method is called after the view has been created, initializing UI components,
+     * setting up a spinner, and defining a click listener for the cancel order button.
+     *
+     * @param view               display view layout
+     * @param savedInstanceState saved state
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -96,9 +118,13 @@ public class fragment_store_orders extends Fragment {
 //                displaySelectedOrder();
 //            }
 //        });
-        view.findViewById(R.id.cancelOrder).setOnClickListener(v-> removeOrder());
+        view.findViewById(R.id.cancelOrder).setOnClickListener(v -> removeOrder());
     }
-    private void populateSpinner(){
+
+    /**
+     * This method populates the spinner with order numbers if there are orders in 'StoreOrders'
+     */
+    private void populateSpinner() {
         if (StoreOrders.getInstance().getTotalOrders() != 0) {
             Spinner orderSpinner = getView().findViewById(R.id.allOrders);
             List<String> orders = new ArrayList<>();
@@ -113,6 +139,10 @@ public class fragment_store_orders extends Fragment {
         }
     }
 
+    /**
+     * This method displays the details of the selected order, including the order summary
+     * and total cost.
+     */
     private void displaySelectedOrder() {
         // Clears listview first of previous items/orders
         displayStoreOrders.setAdapter(null);
@@ -134,6 +164,10 @@ public class fragment_store_orders extends Fragment {
         }
     }
 
+    /**
+     * This method removes the selected order and updates the spinner accordingly, handling success,
+     * error and warning messages when necessary.
+     */
     private void removeOrder() {
         Spinner orderSpinner = getView().findViewById(R.id.allOrders);
         if (orderSpinner.getSelectedItem() != null) {
@@ -153,7 +187,9 @@ public class fragment_store_orders extends Fragment {
         }
     }
 
-    // Example method to show a success message
+    /**
+     * Displays a specific success message if an order is successfully removed from store orders
+     */
     private void showSuccessMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Success")
@@ -162,7 +198,9 @@ public class fragment_store_orders extends Fragment {
                 .show();
     }
 
-    // Example method to show an error message
+    /**
+     * Displays a specific error message if order is not able to be removed from store orders
+     */
     private void showErrorMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Error")
@@ -171,7 +209,9 @@ public class fragment_store_orders extends Fragment {
                 .show();
     }
 
-    // Example method to show a warning message
+    /**
+     * Displays a specific warning message if an order is not selected
+     */
     private void showWarningMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Warning")

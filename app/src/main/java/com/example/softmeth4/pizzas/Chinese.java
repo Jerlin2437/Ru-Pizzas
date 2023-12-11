@@ -22,6 +22,12 @@ public class Chinese extends Pizza{
         sauce = Sauce.ALFREDO;
     }
 
+    /**
+     * Calculates and returns the price of the pizza based on the base cost,
+     * the size of the pizza, whether there is extra sauce and/or extra cheese.
+     *
+     * @return price of the pizza
+     */
     @Override
     public double price() {
         double extraCost = 0.0;
@@ -34,6 +40,11 @@ public class Chinese extends Pizza{
         return PRICE + size.getPrice() + extraCost;
     }
 
+    /**
+     * Getter method (accessor)
+     *
+     * @return "Chinese"
+     */
     @Override
     protected String getPizzaType() {
         return "Chinese";
