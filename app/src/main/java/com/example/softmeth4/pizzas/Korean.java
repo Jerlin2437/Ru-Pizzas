@@ -22,6 +22,12 @@ public class Korean extends Pizza{
         sauce = Sauce.TOMATO;
     }
 
+    /**
+     * Calculates and returns the price of the pizza based on the base cost,
+     * the size of the pizza, whether there is extra sauce and/or extra cheese.
+     *
+     * @return price of the pizza
+     */
     @Override
     public double price() {
         double extraCost = 0.0;
@@ -34,6 +40,11 @@ public class Korean extends Pizza{
         return PRICE + size.getPrice() + extraCost;
     }
 
+    /**
+     * Getter method (accessor)
+     *
+     * @return "Korean"
+     */
     @Override
     protected String getPizzaType() {
         return "Korean";
