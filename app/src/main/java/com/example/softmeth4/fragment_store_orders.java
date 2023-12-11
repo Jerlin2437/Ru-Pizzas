@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -36,8 +35,6 @@ public class fragment_store_orders extends Fragment {
     private Spinner orderSpinner;
     private TextView finalOrderTotal;
     private ListView displayStoreOrders;
-    private Button cancelOrderButton;
-    private Button refreshButton;
 
     /**
      * Default empty constructor
@@ -106,18 +103,6 @@ public class fragment_store_orders extends Fragment {
                 }
             });
         }
-//        orderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-//                displaySelectedOrder();
-//            }
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parentView) {
-//                //if nothing is done, small is the default selection
-//                orderSpinner.setSelection(0);
-//                displaySelectedOrder();
-//            }
-//        });
         view.findViewById(R.id.cancelOrder).setOnClickListener(v -> removeOrder());
     }
 

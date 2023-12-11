@@ -95,7 +95,7 @@ public class fragment_current_order extends Fragment {
         });
         updateCurrentOrderView();
         view.findViewById(R.id.placeOrder).setOnClickListener(v -> placeOrder());
-        view.findViewById(R.id.refreshOrder).setOnClickListener(v -> updateCurrentOrderView());
+//        view.findViewById(R.id.refreshOrder).setOnClickListener(v -> updateCurrentOrderView());
         view.findViewById(R.id.removePizza).setOnClickListener(v -> removePizza());
     }
 

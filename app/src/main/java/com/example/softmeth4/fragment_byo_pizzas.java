@@ -198,11 +198,6 @@ public class fragment_byo_pizzas extends Fragment {
         updatePizzaPrice();
     }
 
-//    private String displayText(String topping){
-//        return topping.replace("_"," ");
-//    }
-
-
     /**
      * Updates the display text view buildPrice, representing the subtotal price for the pizza.
      */
@@ -324,14 +319,6 @@ public class fragment_byo_pizzas extends Fragment {
         private void showFailurePopup1() {
             showToast("Pizza Order Unsuccessful - You need at least 3 toppings.");
         }
-
-//        private void showFailurePopup2() {
-//            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-//            builder.setTitle("Pizza Order Unsuccessful")
-//                    .setMessage("Please select a pizza size.")
-//                    .setPositiveButton("OK", null)
-//                    .show();
-//        }
     }
 
     /**
