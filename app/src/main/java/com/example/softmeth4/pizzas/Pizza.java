@@ -114,7 +114,7 @@ public abstract class Pizza {
      *
      * @return string representation, "None" if no toppings in the array
      */
-    private String toppingsToString() {
+    public String toppingsToString() {
         if (toppings.isEmpty()) {
             return "None";
         } else {

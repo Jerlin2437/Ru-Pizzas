@@ -103,8 +103,7 @@ public class SpecialPizzaAdapter extends RecyclerView.Adapter<SpecialPizzaAdapte
         holder.bind(imageName);
         pizza = pizzaParse(holder);
 
-        ArrayAdapter<Topping> listViewAdapter = new ArrayAdapter<>(holder.itemView.getContext(), android.R.layout.simple_list_item_1, pizza.getToppings());
-        holder.toppings.setAdapter(listViewAdapter);
+        holder.toppings.setText(pizza.toppingsToString());
         updatePrice(holder);
     }
 
@@ -177,7 +176,7 @@ public class SpecialPizzaAdapter extends RecyclerView.Adapter<SpecialPizzaAdapte
         ImageView pizzaImageView;
         Spinner quantitySpinner;
         TextView pizzaName;
-        ListView toppings;
+        TextView toppings;
         RadioGroup sizeGroup;
         // Add other views as needed
 
