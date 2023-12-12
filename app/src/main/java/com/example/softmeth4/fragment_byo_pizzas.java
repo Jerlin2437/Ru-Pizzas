@@ -174,7 +174,6 @@ public class fragment_byo_pizzas extends Fragment {
             showAlert("Too many toppings!", "You can only have a maximum of 7 toppings!");
         } else {
             String noSpaceTopping = selectedTopping.replace(" ", "_");
-//            selectedToppingsAdapter.add(displayText(noSpaceTopping));
             selectedToppingsAdapter.add(noSpaceTopping);
             selectedToppingsAdapter.notifyDataSetChanged();
             notSelectedToppingsAdapter.remove(selectedTopping);
@@ -190,7 +189,6 @@ public class fragment_byo_pizzas extends Fragment {
      */
     private void removeTopping(String selectedTopping) {
         String noSpaceTopping = selectedTopping.replace(" ", "_");
-//        notSelectedToppingsAdapter.add(displayText(noSpaceTopping));
         notSelectedToppingsAdapter.add(noSpaceTopping);
         notSelectedToppingsAdapter.notifyDataSetChanged();
         selectedToppingsAdapter.remove(selectedTopping);
@@ -295,9 +293,6 @@ public class fragment_byo_pizzas extends Fragment {
                 } else {
                     showFailurePopup1();
                 }
-//            } else {
-//                showFailurePopup2();
-//            }
             }
         }
 

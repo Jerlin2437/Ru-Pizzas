@@ -159,7 +159,6 @@ public class fragment_store_orders extends Fragment {
             int orderId = Integer.parseInt(orderSpinner.getSelectedItem().toString());
             if (storeOrders.removeOrder(orderId)) {
                 showSuccessMessage();
-                // Remove the selected item from the spinner
                 ArrayAdapter<String> adapter = (ArrayAdapter<String>) orderSpinner.getAdapter();
                 adapter.remove(orderSpinner.getSelectedItem().toString());
                 adapter.notifyDataSetChanged();

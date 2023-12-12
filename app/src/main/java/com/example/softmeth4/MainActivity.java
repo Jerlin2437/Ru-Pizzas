@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Assuming you have buttons with these IDs in your activity_main.xml layout
         View storeOrdersButton = findViewById(R.id.buttonStoreOrders);
         storeOrdersButton.setOnClickListener(v -> openMainActivity2("store_orders"));
 

@@ -56,7 +56,6 @@ public class MainActivity2 extends AppCompatActivity {
                 }
         );
 
-        // Set the initial fragment
         replaceFragment(specialPizzasFragment);
     }
 
