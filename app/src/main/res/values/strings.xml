@@ -46,6 +46,7 @@
     <string name="store_orders_total">0.00</string>
 
 <!--    for specialty pizzas hardcoded text-->
+    <string name="specialty_header">Specialty Pizzas</string>
     <string name="specialty_pizza_extra_sauce">Extra Sauce</string>
     <string name="specialty_pizza_extra_cheese">Extra Cheese</string>
     <string name="specialty_pizza_add_to_order">Add to order!</string>
